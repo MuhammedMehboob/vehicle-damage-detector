@@ -58,8 +58,30 @@ Each folder has its own README with setup/run instructions.
 
 Trained on a vehicle damage image dataset published in [this paper](https://www.sciencedirect.com/science/article/pii/S2405844024100473) (ScienceDirect, 2024), used here strictly for academic/educational purposes. Full citation in `notebook/README.md`.
 
+## Model Performance
 
+### Overall Metrics
 
+| Metric | Score |
+|----------|----------|
+| Accuracy | 80% |
+| Weighted F1-Score | 0.80 |
+| Macro F1-Score | 0.79 |
+| Test Samples | 575 |
+| Number of Classes | 6 |
+
+### Per-Class Performance
+
+| Class | Precision | Recall | F1-Score |
+|---------|---------:|---------:|---------:|
+| 0 | 0.78 | 0.90 | 0.84 |
+| 1 | 0.83 | 0.70 | 0.76 |
+| 2 | 0.89 | 0.89 | 0.89 |
+| 3 | 0.71 | 0.85 | 0.78 |
+| 4 | 0.75 | 0.64 | 0.69 |
+| 5 | 0.78 | 0.79 | 0.79 |
+
+**Summary:** The fine-tuned ResNet-50 model achieved **80% overall accuracy** and a **0.80 weighted F1-score** across six vehicle damage categories, demonstrating strong and balanced classification performance.
 ## Running locally
 
 ```bash
