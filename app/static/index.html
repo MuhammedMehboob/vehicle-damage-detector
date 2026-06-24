@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehile-Damage-Detector | Advanced Vehicle Damage Analyzer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="header-logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-car-burst"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Vehicle-Damage-Detector</h1>
+                    <span>VEHICLE DAMAGE INSPECTION SYSTEM</span>
+                </div>
+            </div>
+            <div class="header-status">
+                <span class="status-indicator online"></span>
+                <span class="status-text">AI CORE ONLINE</span>
+            </div>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <main class="workspace-grid">
+
+            <!-- Left Side: Upload and Live Preview Area -->
+            <section class="workspace-card upload-section">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-camera"></i> Image Upload</h2>
+                    <p>Provide a high-quality front or rear view of the vehicle</p>
+                </div>
+
+                <div class="dropzone-container">
+                    <div id="dropzone" class="dropzone">
+                        <input type="file" id="file-input" accept="image/jpeg, image/png" hidden>
+                        <div class="dropzone-content" id="dropzone-content-default">
+                            <div class="upload-icon">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h3>Drag & drop vehicle photo</h3>
+                            <p>or click to browse local files</p>
+                            <span class="file-limits">Supports JPG, JPEG, PNG (max 10MB)</span>
+                        </div>
+
+                        <!-- Image Preview Overlay (hidden initially) -->
+                        <div class="preview-overlay hidden" id="preview-overlay">
+                            <img id="image-preview" src="#" alt="Uploaded Vehicle">
+                            <div class="scan-laser hidden" id="scan-laser"></div>
+                            <button id="remove-btn" class="remove-button" title="Remove image">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips box for user guidelines -->
+                <div class="tips-box">
+                    <h4><i class="fa-solid fa-circle-info"></i> Inspection Guidelines</h4>
+                    <ul>
+                        <li>Ensure lighting is bright and glare is minimal.</li>
+                        <li>Center the vehicle bumper (front or rear) in the frame.</li>
+                        <li>Avoid side-angle photos for best classification accuracy.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Right Side: AI Analytics Dashboard -->
+            <section class="workspace-card results-section">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-chart-pie"></i> Diagnostic Report</h2>
+                    <p>AI computer vision prediction and inspection recommendations</p>
+                </div>
+
+                <div class="diagnostic-container">
+                    <!-- State 1: Awaiting Upload (Default) -->
+                    <div id="state-empty" class="state-view">
+                        <div class="empty-illustration">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3>Ready for Analysis</h3>
+                        <p>Upload a vehicle photo in the upload section to run the deep learning damage classifier.</p>
+                    </div>
+
+                    <!-- State 2: Processing (Loading) -->
+                    <div id="state-loading" class="state-view hidden">
+                        <div class="analysis-spinner">
+                            <div class="spinner-ring"></div>
+                            <div class="spinner-core"><i class="fa-solid fa-microchip"></i></div>
+                        </div>
+                        <h3>Analyzing Structure...</h3>
+                        <p>Extracting tensor patterns & running ResNet-50 inference</p>
+
+                        <!-- Skeleton loader to show premium transition -->
+                        <div class="skeleton-loader">
+                            <div class="skeleton-line short"></div>
+                            <div class="skeleton-line long"></div>
+                            <div class="skeleton-line medium"></div>
+                        </div>
+                    </div>
+
+                    <!-- State 3: Analysis Results -->
+                    <div id="state-results" class="state-view hidden">
+                        <!-- Diagnostic Status Header -->
+                        <div class="result-status-card">
+                            <span class="report-id" id="result-report-id">REPORT: #VR-84920</span>
+                            <h3 id="result-status-title">CRITICAL DAMAGE DETECTED</h3>
+                            <div class="badge" id="result-severity-badge">HIGH SEVERITY</div>
+                        </div>
+
+                        <!-- Severity Slider / Meter -->
+                        <div class="severity-meter-container">
+                            <div class="meter-labels">
+                                <span>No Damage</span>
+                                <span>Moderate</span>
+                                <span>Critical</span>
+                            </div>
+                            <div class="meter-bar">
+                                <div class="meter-fill" id="meter-fill"></div>
+                                <div class="meter-marker" id="meter-marker"></div>
+                            </div>
+                        </div>
+
+                        <!-- Metrics Grid -->
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Target Zone</span>
+                                <span class="metric-value" id="result-zone">Rear End</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Classification</span>
+                                <span class="metric-value" id="result-class">Rear Crushed</span>
+                            </div>
+                        </div>
+
+                        <!-- Damage Details -->
+                        <div class="results-detail-card">
+                            <h4><i class="fa-solid fa-file-invoice"></i> Assessment Details</h4>
+                            <p id="result-description">Structural impact detected on the rear bumper. The energy
+                                absorption beam is likely crushed.</p>
+                        </div>
+
+                        <!-- Action Plan & Recommendations -->
+                        <div class="action-plan-card">
+                            <h4><i class="fa-solid fa-shield-halved"></i> Recommended Action Plan</h4>
+                            <ul class="action-steps" id="action-steps-list">
+                                <!-- Dynamic action steps go here -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Section: History / Recent Inspections -->
+        <footer class="app-footer">
+            <div class="footer-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Inspection Logs</h3>
+                <button id="clear-history-btn" class="clear-btn hidden"><i class="fa-solid fa-trash-can"></i> Clear
+                    Log</button>
+            </div>
+
+            <div class="history-grid-container">
+                <div id="history-grid" class="history-grid">
+                    <!-- Dynamic history card elements inserted here -->
+                    <div class="history-empty" id="history-empty">
+                        <p>No previous scans found. Inspections you perform will be saved in your session history.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

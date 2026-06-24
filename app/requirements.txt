@@ -1,0 +1,7 @@
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+Pillow==9.4.0
+fastapi==0.138.0
+uvicorn>=0.22.0
+python-multipart>=0.0.6
+aiofiles>=23.1.0

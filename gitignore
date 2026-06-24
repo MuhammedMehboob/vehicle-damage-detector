@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights (90MB .pth — hosted on Hugging Face Space instead, keep repo light)
+*.pth
+*.pt
+*.h5
+*.onnx
+*.pkl
+*.keras
+app/model/
+
+# Dataset (637MB, 2300+ files — cite the source paper instead, don't commit raw data)
+notebook/dataset/
+dataset/
+*.csv
+data/raw/
+data/processed/
+*.zip
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Env secrets
+.env
+.env.local
