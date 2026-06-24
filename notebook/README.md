@@ -6,9 +6,11 @@ Contains the full training pipeline for the vehicle damage classifier:
 
 ## Dataset
 
-[Add full citation: Authors, "Title of paper," *Journal name*, 2024.](https://www.sciencedirect.com/science/article/pii/S2405844024100473)
+Trained on the **Three-Quarter View Car Damage Dataset (TQVCD)**, introduced in:
 
-Used here strictly for academic/non-commercial purposes. The dataset (637MB, 2,300+ images) is not included in this repo — see the paper above for access. Please cite the original authors if you reuse this dataset.
+> Lee, D., Lee, J., & Park, E. (2024). Automated vehicle damage classification using the three-quarter view car damage dataset and deep learning approaches. *Heliyon*, 10(14), e34016. https://doi.org/10.1016/j.heliyon.2024.e34016
+
+Used here strictly for academic/non-commercial purposes. Full text and dataset access available via [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S2405844024100473) / [PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC11298869/).
 
 ## How to run
 
@@ -17,10 +19,4 @@ pip install torch torchvision jupyter pandas numpy matplotlib  # or see notebook
 jupyter notebook damage_prediction.ipynb
 ```
 
-## Results
 
-[Add final metrics here, e.g.:
-- Validation accuracy: __%
-- Classes: No Damage / Moderate / Critical
-- Confusion matrix screenshot
-- Sample predictions]

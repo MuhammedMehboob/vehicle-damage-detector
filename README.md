@@ -1,10 +1,9 @@
 # 🚗 Vehicle Damage Detector
 
-An end-to-end deep learning system that classifies vehicle damage severity and location from a single photo — built from raw dataset to a deployed, public-facing web app.
+An end-to-end deep learning system that classifies vehicle damage severity and location from a single photo - built from raw dataset to a deployed, public-facing web app.
 
 **🔴 Live Demo:** [muhammed19-vehicle-damage-estimator.hf.space](https://muhammed19-vehicle-damage-estimator.hf.space)
 
-![Demo Screenshot](docs/screenshots/demo.png)
 
 ---
 
@@ -17,10 +16,6 @@ Upload a photo of a vehicle's front or rear end, and the system returns:
 - **A short assessment and recommended action plan**
 
 This kind of automated triage is the same problem insurance claims processing and used-car inspection platforms solve — this project replicates that pipeline end-to-end.
-
-## Why I built it
-
-[Write 2-3 sentences here — e.g. "I wanted to go beyond training a model in a notebook and actually understand the full lifecycle of shipping a CV model: from preprocessing a real-world dataset, to training and evaluating a CNN, to serving predictions through a production-style API, to building a usable frontend on top of it."]
 
 ## Architecture
 
@@ -63,15 +58,13 @@ Each folder has its own README with setup/run instructions.
 
 Trained on a vehicle damage image dataset published in [this paper](https://www.sciencedirect.com/science/article/pii/S2405844024100473) (ScienceDirect, 2024), used here strictly for academic/educational purposes. Full citation in `notebook/README.md`.
 
-## Model performance
 
-[Fill in: accuracy / F1 / confusion matrix summary, e.g. "Achieved 91% validation accuracy across 3 damage severity classes after fine-tuning ResNet-50 with data augmentation."]
 
 ## Running locally
 
 ```bash
 # 1. Clone
-git clone https://github.com/<your-username>/vehicle-damage-detector.git
+git clone https://github.com/MuhammedMehboob/vehicle-damage-detector
 cd vehicle-damage-detector
 
 # 2. Backend + frontend (served together via FastAPI)
@@ -91,6 +84,3 @@ Then open `http://localhost:8000` in your browser.
 - [ ] Replace plain JS frontend with React for richer UX
 - [ ] Add model explainability (e.g. Grad-CAM) to show which region drove the prediction
 
-## License
-
-MIT — see [LICENSE](LICENSE)
