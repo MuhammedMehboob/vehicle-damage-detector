@@ -2,7 +2,7 @@
 
 Contains the full training pipeline for the vehicle damage classifier:
 - `damage_prediction.ipynb` — data loading, preprocessing, model definition (ResNet-50 transfer learning), training loop, evaluation
-- `hyperparameter_tunning.ipynb` — learning rate / hyperparameter search
+- `hyperparameter_tuning.ipynb` — learning rate / hyperparameter search
 
 ## Dataset
 
